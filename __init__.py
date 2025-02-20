@@ -21,17 +21,21 @@ username = os.getenv("BDC_USERNAME")
 # print(apiKey)
 
 # Configure logging
-logging.basicConfig(filename="bdc.log", filemode="w", format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    filename="bdc.log", filemode="w", format="%(asctime)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
 
 # print(logger)
 
-from .helpers import *
+from .helpers import get_session
 
 session = get_session(apiKey, username)
 
-from .bdc import *
+from .helpers import get_metadata
 
 metadata = get_metadata()
+
+from .bdc import *
