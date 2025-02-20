@@ -34,7 +34,7 @@ from .helpers import get_session
 
 session = get_session(apiKey, username)
 
-from .helpers import get_metadata
+from .helpers import get_metadata, bdcCache
 
 metadata = get_metadata()
 

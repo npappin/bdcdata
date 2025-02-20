@@ -10,14 +10,14 @@ Updated on Feb 11 2025.
 """
 
 from . import logger
-import json
+import json, pathlib
 
 from requests_ratelimiter import LimiterSession
 
 
 def get_session(apiKey, username, cache=False):
     session = LimiterSession(max_retries=3, per_minute=10)
-    session.headers.update({"User-Agent": "bdclib"})
+    session.headers.update({"User-Agent": "python-bdc"})
     session.headers.update({"hash_value": apiKey})
     session.headers.update({"username": username})
     logger.debug(session.headers)
@@ -46,3 +46,31 @@ def get_metadata():
                 logger.debug(item)
                 metadata[t].append(item["as_of_date"])
     return metadata
+
+class bdcCache:
+    def check(filename):
+        if pathlib.Path('cache', f'{filename}.zip').exists():
+            return True
+        else:
+            return False
+        
+    def save(filename, data):
+        if not pathlib.Path('cache').exists():
+            pathlib.Path('cache').mkdir(parents=True, exist_ok=True)
+        with open(pathlib.Path('cache', f'{filename}.zip'), 'wb')as f:
+            f.write(data)
+        pass
+    
+    def get(filename):
+        with open(pathlib.Path('cache', f'{filename}.zip'), 'rb') as f:
+            return f.read()
+
+
+# def check_cache(filename):
+#     import os
+
+#     return os.path.isfile(filename)
+
+# def cache_data(filename, data):
+#     if 
+#     pass
