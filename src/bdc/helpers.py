@@ -12,7 +12,7 @@ Updated on Feb 11 2025.
 from . import logger
 import json, pathlib
 
-from requests_ratelimiter import LimiterSession
+from requests_ratelimiter import LimiterSession # type: ignore
 
 
 def get_session(apiKey, username, cache=False):
