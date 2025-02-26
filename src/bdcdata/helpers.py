@@ -65,12 +65,8 @@ class bdcCache:
         with open(pathlib.Path('cache', f'{filename}.zip'), 'rb') as f:
             return f.read()
 
-
-# def check_cache(filename):
-#     import os
-
-#     return os.path.isfile(filename)
-
-# def cache_data(filename, data):
-#     if 
-#     pass
+# Detect if parameter is empty. This is a placeholder for future implementation.
+# This function should be implemented to check if a parameter is empty or not.
+def isEmpty():
+    
+    pass
