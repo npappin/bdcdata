@@ -13,6 +13,7 @@ from . import logger, session, metadata, bdcCache
 import pandas as pd
 import json, zipfile, io
 from pprint import pprint
+from .helpers import isEmpty
 
 # from . import config
 
@@ -29,6 +30,9 @@ class availability:
         logger.debug(f"State: {states}")
         logger.debug(f"Technology: {technology}")
         logger.debug(f"Release: {release}")
+        # TODO: Add empty detection here
+        if isEmpty(states) or isEmpty(technology) or isEmpty(release):
+            raise Exception("One or more parameters are empty.")
         if type(states) is not list:
             states = [states]
         if type(technology) is not list:
