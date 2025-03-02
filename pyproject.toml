@@ -13,7 +13,7 @@ maintainers = [
 ]
 description = "A tool to work with BDC data from the FCC."
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.10"
 dependencies = [
   "requests-ratelimiter",
   "python-dotenv",
