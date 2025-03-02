@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bdcdata"
-version = "0.0.3"
+version = "0.0.4"
 authors = [
   { name="W. Nick Pappin", email="nick.pappin@wsu.edu" },
 ]
@@ -13,7 +13,7 @@ maintainers = [
 ]
 description = "A tool to work with BDC data from the FCC."
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.10"
 dependencies = [
   "requests-ratelimiter",
   "python-dotenv",
