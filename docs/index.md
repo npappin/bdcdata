@@ -1,4 +1,4 @@
-# bdcdata Help
+# Help for bdcdata
 
 ## Getting started
 
