@@ -68,5 +68,5 @@ class bdcCache:
 # Detect if parameter is empty. This is a placeholder for future implementation.
 # This function should be implemented to check if a parameter is empty or not.
 def isEmpty():
-    
-    pass
+    # TODO: Implement is empty detection.
+    return False
