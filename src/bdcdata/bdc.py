@@ -19,6 +19,9 @@ from .helpers import isEmpty
 
 
 class availability:
+    """
+    A class to retrieve broadband availability data for specified states, technologies, and release dates.
+    """
 
     def state(
         states: int | str | list = "53",
@@ -26,6 +29,26 @@ class availability:
         release: str | list = "2024-06-30",
         cache=False,
     ) -> pd.DataFrame:
+        """
+        Retrieves broadband availability data for specified states, technologies, and release dates.
+
+        Args:
+            states (int | str | list, optional): State FIPS code(s) to filter by. 
+                Can be a single value, a list of values, or "all" to include all states. Defaults to "53".
+            technology (int | str | list, optional): Technology code(s) to filter by. 
+                Can be a single value, a list of values, "all" to include all technologies, 
+                "fixed" for fixed technologies, or "mobile" for mobile technologies. Defaults to "50".
+            release (str | list, optional): Release date(s) to filter by. Can be a single value or a list of values. Defaults to "2024-06-30".
+            cache (bool, optional): Whether to use caching for downloaded files. Defaults to False.
+
+        Raises:
+            Exception: If one or more parameters are empty.
+            Exception: If availability data retrieval fails for a specific release.
+            Exception: If availability data retrieval fails for a specific state, technology, or release.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing the filtered broadband availability data.
+        """
         logger.info("Collecting availability...")
         logger.debug(f"State: {states}")
         logger.debug(f"Technology: {technology}")
