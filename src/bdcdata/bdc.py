@@ -27,7 +27,7 @@ class availability:
         states: int | str | list = "53",
         technology: int | str | list = "50",
         release: str | list = "2024-06-30",
-        cache=False,
+        cache: bool = False,
     ) -> pd.DataFrame:
         """
         Retrieves broadband availability data for specified states, technologies, and release dates.
