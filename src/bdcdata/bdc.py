@@ -76,6 +76,16 @@ class availability:
             # TODO: adding dtype hints here I think would be helpful.
             availability[r] = pd.DataFrame.from_dict(response.json()["data"])
         df = pd.DataFrame()
+        if "all" in states:
+            states = availability[r].state_fips.drop_duplicates().dropna().tolist()
+        if "all" in technology:
+            technology = availability[r].technology_code.drop_duplicates().dropna().tolist()
+        elif "fixed" in technology:
+            technology = availability[r][((availability[r].subcategory == "Location Coverage") & (availability[r].provider_id.isnull()))].technology_code.drop_duplicates().dropna().tolist()
+            technology = [t for t in technology if int(t) < 100]
+        elif "mobile" in technology:
+            technology = availability[r][((availability[r].subcategory == "Location Coverage") & (availability[r].provider_id.isnull()))].technology_code.drop_duplicates().dropna().tolist()
+            technology = [t for t in technology if int(t) >= 100]
         for r in release:
             rlocal = availability[r]
             items = rlocal[
