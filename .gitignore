@@ -1,3 +1,5 @@
 **/__pycache__/
 cache/
 .env
+*.log
+debug1.py
