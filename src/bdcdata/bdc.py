@@ -75,7 +75,6 @@ class availability:
                 raise Exception(f"Failed to retrieve availability data for {r}.")
             # TODO: adding dtype hints here I think would be helpful.
             availability[r] = pd.DataFrame.from_dict(response.json()["data"])
-        df = pd.DataFrame()
         if "all" in states:
             states = availability[r].state_fips.drop_duplicates().dropna().tolist()
         if "all" in technology:
@@ -86,6 +85,22 @@ class availability:
         elif "mobile" in technology:
             technology = availability[r][((availability[r].subcategory == "Location Coverage") & (availability[r].provider_id.isnull()))].technology_code.drop_duplicates().dropna().tolist()
             technology = [t for t in technology if int(t) >= 100]
+        
+        df = pd.DataFrame()
+        columnHints = {
+            'frn': str,
+            'provider_id': 'UInt32',
+            'brand_name': str,
+            'location_id': 'UInt32',
+            'technology': 'UInt16',
+            'max_advertised_download_speed': 'UInt32',
+            'max_advertised_upload_speed': 'UInt32',
+            'low_latency': 'boolean',
+            'business_residental_code': 'category',
+            'state_usps': 'category',
+            'block_geoid': str,
+            'h3_res8_id': str,
+        }
         
         if len(release) * len(states) * len(technology) > 100:
             logger.warning(
@@ -126,7 +141,9 @@ class availability:
                     zip = zipfile.ZipFile(io.BytesIO(data))
                     localdf = pd.read_csv(
                         zip.open(zip.filelist[0].filename)
-                    )  # , dtype=columnHints)
+                    , dtype=columnHints,
+                    dtype_backend="pyarrow"
+                    )
                     df = pd.concat([df, localdf], ignore_index=True)
                 logger.info(f"df memory size (hinted): {df.memory_usage(deep=True).sum()/1000000} MB")
                 logger.info(f"df shape: {df.shape}")
