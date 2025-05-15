@@ -122,6 +122,8 @@ class availability:
                         zip.open(zip.filelist[0].filename)
                     )  # , dtype=columnHints)
                     df = pd.concat([df, localdf], ignore_index=True)
+                logger.info(f"df memory size (hinted): {df.memory_usage(deep=True).sum()/1000000} MB")
+                logger.info(f"df shape: {df.shape}")
         logger.debug(f"State: {states}, Technology: {technology}, Release: {release}")
         return df
 
