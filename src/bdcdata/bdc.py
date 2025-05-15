@@ -86,6 +86,12 @@ class availability:
         elif "mobile" in technology:
             technology = availability[r][((availability[r].subcategory == "Location Coverage") & (availability[r].provider_id.isnull()))].technology_code.drop_duplicates().dropna().tolist()
             technology = [t for t in technology if int(t) >= 100]
+        
+        if len(release) * len(states) * len(technology) > 100:
+            logger.warning(
+                f"Retrieving {len(release) * len(states) * len(technology)} records. This may take a while... or crash."
+            )
+        
         for r in release:
             rlocal = availability[r]
             items = rlocal[
@@ -95,7 +101,7 @@ class availability:
             ].to_dict("records")
             for item in items:
                 logger.debug(
-                    f"State: {item['state_name']}, Technology: {item['technology_code']}, Release: {r}"
+                    f"State: {item['state_name']}({item})), Technology: {item['technology_code']}, Release: {r}"
                 )
                 # FUCK I DONT LIKE THIS
                 if cache and bdcCache.check(item["file_name"]):
