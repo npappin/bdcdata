@@ -6,7 +6,7 @@ Created on Feb 10 2025.
 @author: npappin-wsu
 @license: MIT
 
-Updated on Feb 11 2025.
+Updated on May 14 2025.
 """
 
 from . import logger, session, metadata, bdcCache
@@ -62,6 +62,8 @@ class availability:
             technology = [technology]
         if type(release) is not list:
             release = [release]
+        technology = [str(t) for t in technology]
+        states = [str(s) for s in states]
         # TODO: Add normalization code here
 
         # Retrieve availability data
