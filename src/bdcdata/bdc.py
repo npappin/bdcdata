@@ -53,9 +53,12 @@ class availability:
         logger.debug(f"State: {states}")
         logger.debug(f"Technology: {technology}")
         logger.debug(f"Release: {release}")
+        
         # TODO: Add empty detection here
         if isEmpty(states) or isEmpty(technology) or isEmpty(release):
             raise Exception("One or more parameters are empty.")
+        
+        # Normalization code
         if type(states) is not list:
             states = [states]
         if type(technology) is not list:
@@ -64,7 +67,6 @@ class availability:
             release = [release]
         technology = [str(t) for t in technology]
         states = [str(s) for s in states]
-        # TODO: Add normalization code here
 
         # Retrieve availability data
         availability = dict()
