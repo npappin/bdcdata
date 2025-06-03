@@ -32,7 +32,7 @@ def get_metadata():
     r = session.get("https://broadbandmap.fcc.gov/api/public/map/listAsOfDates")
     logger.debug(r.json())
     parsed = json.loads(r.text)
-    logger.debug(parsed)
+    logger.info(parsed)
     logger.debug(parsed["data"])
     logger.info("Metadata collected.")
     types = set([item["data_type"] for item in parsed["data"]])
