@@ -18,6 +18,7 @@ dependencies = [
   "requests-ratelimiter",
   "python-dotenv",
   "pandas>=2",
+  "pyarrow",
 ]
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
